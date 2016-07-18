@@ -25,21 +25,19 @@ class SnakeGame(object):
         :type direction: str
         :rtype: int
         """
-        def valueOf(head):
-            return head[0] * self.width + head[1]
         head = self.body[0]
         tail = self.body.pop()
         x = head / self.width
         y = head % self.width
-        newHeadList = [x + self.directions[direction][0],
-            y + self.directions[direction][1]]
-        newHead = valueOf(newHeadList)
-        if (0 > newHeadList[0] or newHeadList[0] >= self.height or newHeadList[1] < 0 or newHeadList[1] >= self.width
+        newx = x + self.directions[direction][0]
+        newy = y + self.directions[direction][1]
+        newHead = newx * self.width + newy
+        if (newx < 0 or newx >= self.height or newy < 0 or newy >= self.width
             or newHead in self.body):
             return -1
         self.body.insert(0, newHead)
-        if (self.foodCount < len(self.food) and newHeadList[0] == self.food[self.foodCount][0] and 
-            newHeadList[1] == self.food[self.foodCount][1]):
+        if (self.foodCount < len(self.food) and newx == self.food[self.foodCount][0] and 
+            newy == self.food[self.foodCount][1]):
             self.foodCount += 1
             self.body.append(tail)
         return len(self.body) - 1
