@@ -19,7 +19,6 @@ class Solution(object):
                     num += sums[z]
                     if num <= k:
                         ans = max(num, ans)
-                   
                     index = bisect.bisect_left(slist, num - k)
                     if index != len(slist):
                         ans = max(ans, num - slist[index])
