@@ -5,21 +5,21 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        m = len(matrix)
-        n = len(matrix[0]) if m else 0
-
-        M = max(m, n)
-        N = min(m, n)
+        if not matrix:
+            return 0
+        M, N = len(matrix), len(matrix[0])
+        m, n = max(M, N), min(M, N)
         ans = None
-        for x in range(N):
-            sums = [0] * M
-            for y in range(x, N):
+        for x in range(n):
+            sums = [0] * m
+            for y in range(x, n):
                 num, slist = 0, []
-                for z in range(M):
-                    sums[z] += matrix[z][y] if m > n else matrix[y][z]
+                for z in range(m):
+                    sums[z] += matrix[z][y] if M > N else matrix[y][z]
                     num += sums[z]
                     if num <= k:
-                        ans = max(ans, num)
+                        ans = max(num, ans)
+                   
                     index = bisect.bisect_left(slist, num - k)
                     if index != len(slist):
                         ans = max(ans, num - slist[index])
