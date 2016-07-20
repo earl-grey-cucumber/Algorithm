@@ -4,6 +4,8 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
+        return ' '.join(reversed(s.split()))
+        """
         result = ""
         n = len(s)
         i, j = n - 1, n - 1
@@ -21,4 +23,4 @@ class Solution(object):
                 result += " " + s[i: j + 1]
             i -= 1
         return result
-            
+        """  
