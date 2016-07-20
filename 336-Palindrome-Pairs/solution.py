@@ -18,9 +18,3 @@ class Solution(object):
                 if j > 0 and pre == pre[::-1] and suf[::-1] in maps and maps[suf[::-1]] != i:
                     result.append([maps[suf[::-1]], i])
         return result
-        """
-                if suffix == suffix[::-1] and prefix[::-1] in mapping and mapping[prefix[::-1]] != i:
-                    result.append([i, mapping[prefix[::-1]]])
-                if j > 0 and prefix == prefix[::-1] and suffix[::-1] in mapping and mapping[suffix[::-1]] != i:
-                    result.append([[mapping[suffix[::-1]], i])
-        """
