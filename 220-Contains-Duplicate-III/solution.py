@@ -9,17 +9,12 @@ class Solution(object):
         if k < 0 or t < 0:
             return False
         window = collections.OrderedDict()
-        for n in nums:
-            # Make sure window size
+        for num in nums:
             if len(window) > k:
                 window.popitem(False)
-                
-            bucket = n if not t else n // t
-            # At most 2t items.
-            for m in (window.get(bucket - 1), window.get(bucket), window.get(bucket + 1)):
-                if m is not None and abs(n - m) <= t:
+            gap = num if not t else num // t
+            for val in(window.get(gap - 1), window.get(gap), window.get(gap + 1)):
+                if val is not None and abs(val - num) <= t:
                     return True
-            window[bucket] = n
+                window[gap] = num
         return False
-    # Time:  O(n * t)
-    # Space: O(max(k, t))
