@@ -4,8 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        return ' '.join(reversed(s.split( )))
-        """
+        #return ' '.join(reversed(s.split( )))
         result = ""
         n = len(s)
         i, j = n - 1, n - 1
@@ -16,11 +15,10 @@ class Solution(object):
             while i > 0 and s[i - 1] != ' ':
                 i -= 1
             if i < 0:
-                return result
+               return result
             if not result:
                 result += s[i: j + 1]
             else:
                 result += " " + s[i: j + 1]
             i -= 1
         return result
-        """  
