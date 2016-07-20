@@ -4,7 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        return ' '.join(reversed(s.split()))
+        return ' '.join(reversed(s.split( )))
         """
         result = ""
         n = len(s)
