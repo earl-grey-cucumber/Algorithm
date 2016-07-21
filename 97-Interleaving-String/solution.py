@@ -9,16 +9,17 @@ class Solution(object):
         m, n, k = len(s1), len(s2), len(s3)
         if m + n != k:
             return False
-        dp = [[False for j in range(n + 1)]for i in range(m + 1)]
-        dp[0][0] = True
-        for i in range(1, m + 1):
-            dp[i][0] = True if dp[i - 1][0] and s1[i - 1] == s3[i - 1] else False
+        dp = [False for j in range(n + 1)]
+        dp[0] = True
         for j in range(1, n + 1):
-            dp[0][j] = True if dp[0][j - 1] and s2[j - 1] == s3[j - 1] else False
+            dp[j] = True if dp[j - 1] and s2[j - 1] == s3[j - 1] else False
         for i in range(1, m + 1):
+            dp[0] = True if dp[0] and s1[i - 1] == s3[i - 1] else False
             for j in range(1, n + 1):
-                if s1[i - 1] == s3[i + j - 1] and dp[i - 1][j]:
-                    dp[i][j] = True
-                if s2[j - 1] == s3[i + j - 1] and dp[i][j - 1]:
-                    dp[i][j] = True
-        return dp[m][n]
+                if s1[i - 1] == s3[i + j - 1] and dp[j]:
+                    dp[j] = True
+                elif s2[j - 1] == s3[i + j - 1] and dp[j - 1]:
+                    dp[j] = True
+                else:
+                    dp[j] = False
+        return dp[n]
