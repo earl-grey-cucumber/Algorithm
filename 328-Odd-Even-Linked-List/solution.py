@@ -6,18 +6,22 @@
 
 class Solution(object):
     def oddEvenList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
         if not head or not head.next:
             return head
         cur1, head2, tail1 = head, head.next, None
         while cur1:
-            if not cur1.next: # 1->2->3, tail1->3
+            if not cur1.next:
                 tail1 = cur1
                 break
             cur2 = cur1.next
             cur1.next = cur2.next
             if cur2.next:
                 cur2.next = cur2.next.next
-            if not cur1.next: # 1->2->3->4, tail1->3
+            if not cur1.next:
                 tail1 = cur1
                 break
             cur1 = cur1.next
