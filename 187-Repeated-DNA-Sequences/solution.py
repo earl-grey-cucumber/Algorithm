@@ -10,12 +10,12 @@ class Solution(object):
         dictionary = {'A': 0, "C": 1, 'G': 2, 'T':3}
         cur = 0
         result = []
-        mask = (1 << 20) - 1
+        mask = (1 << 18) - 1
         for i in range(10):
             cur = (cur << 2) | dictionary[s[i]]
         maps[cur] = 1
         for i in range(10, len(s)):
-            cur = ((cur << 2) | dictionary[s[i]]) & mask
+            cur = ((cur & mask) << 2) | dictionary[s[i]]
             if cur not in maps:
                 maps[cur] = 1
             else:
