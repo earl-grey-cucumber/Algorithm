@@ -11,14 +11,9 @@ class Solution(object):
                 result += d**2
                 n /= 10
             return result
-        slow, fast = n, n
-        while fast != 1:
-            fast = convert(fast)
-            if fast == 1:
-                return True
-            slow = convert(slow)
-            fast = convert(fast)
-            if slow == fast:
-                return False
-        return True
+        visited = set()
+        while n != 1 and n not in visited:
+            visited.add(n)
+            n = convert(n)
+        return n == 1
         
