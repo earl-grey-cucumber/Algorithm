@@ -15,7 +15,7 @@ class Solution(object):
         dummy = ListNode(0)
         pre, cur = dummy, head
         dummy.next = head
-        while cur and cur.next:
+        while cur.next:
             if cur.val > cur.next.val:
                 while pre.next and pre.next.val < cur.next.val:
                     pre = pre.next
