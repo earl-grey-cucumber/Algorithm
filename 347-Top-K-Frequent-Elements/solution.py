@@ -12,14 +12,11 @@ class Solution(object):
                 dic[num] += 1
         heap = []
         for i in dic:
-            #print(str(dic[i]) + " " + str(i))
-            #print(len(heap))
             if len(heap) < k:
                 heap.append([dic[i], i])
                 if len(heap) == k:
                     heapq.heapify(heap)
             elif heapq.nsmallest(1, heap)[0][0] < dic[i]:
-                #print(heapq.nsmallest(1, heap)[0][0])
                 heapq.heappop(heap)
                 heapq.heappush(heap, [dic[i], i])
         while k > 0:
