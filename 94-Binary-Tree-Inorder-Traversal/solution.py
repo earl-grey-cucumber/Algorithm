@@ -7,17 +7,15 @@
 
 class Solution(object):
     def inorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
+        stack = []
         result = []
-        self.dfs(root, result)
+        cur = root
+        while stack or cur:
+            if cur:
+               stack.append(cur)
+               cur = cur.left
+            else:
+                cur = stack.pop()
+                result.append(cur.val)
+                cur = cur.right
         return result
-    
-    def dfs(self, cur, result):
-        if not cur:
-            return result
-        self.dfs(cur.left, result)
-        result.append(cur.val)
-        self.dfs(cur.right, result)
