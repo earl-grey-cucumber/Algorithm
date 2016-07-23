@@ -2,7 +2,7 @@ class Solution(object):
     def minSubArrayLen(self, s, nums):
         def helper(sums, i, target):
             low, high = i, len(sums) - 1
-            index = len(sums) + 1
+            index = len(sums)
             while low <= high:
                 mid = low + (high - low) / 2
                 if sums[mid] >= target:
