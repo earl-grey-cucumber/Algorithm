@@ -29,6 +29,6 @@ class Solution(object):
                         mapping[key] = 2
                     else:
                         mapping[key] += 1
-                for val in mapping.values():
-                    max_count = max(max_count, val + same)
+            for val in mapping.values():
+                max_count = max(max_count, val + same)
         return max_count
