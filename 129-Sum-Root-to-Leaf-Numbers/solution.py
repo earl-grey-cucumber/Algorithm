@@ -11,8 +11,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        sums = 0
-        return self.helper(root, sums)
+        return self.helper(root, 0)
         
     def helper(self, cur, sums):
         if not cur:
