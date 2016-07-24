@@ -16,7 +16,7 @@ class Solution:
         return result
     
     def helper(self, root, result, path):
-        if root.left is None and root.right is None:
+        if not root.left and not root.right:
             result.append(path + str(root.val))
             return
         if root.left:
