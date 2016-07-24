@@ -7,9 +7,24 @@
 
 class Solution(object):
     def postorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
+        if not root:
+            return []
+        stack, result = [], []
+        cur, pre = root, None
+        while cur or stack:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                peek = stack[-1]
+                if peek.right and peek.right != pre:
+                    cur = peek.right
+                else:
+                    result.append(peek.val)
+                    stack.pop()
+                    pre = peek
+        return result
+        
         """
         if not root:
             return []
@@ -22,3 +37,4 @@ class Solution(object):
             if cur.right:
                 stack.append(cur.right)
         return result[::-1]
+        """
