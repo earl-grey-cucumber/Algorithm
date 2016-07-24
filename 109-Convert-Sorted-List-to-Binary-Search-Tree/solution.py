@@ -12,7 +12,7 @@
 #         self.right = None
 
 class Solution(object):
-    cur = None
+    #cur = None
     def sortedListToBST(self, head):
         """
         :type head: ListNode
