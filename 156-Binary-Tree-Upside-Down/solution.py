@@ -22,3 +22,16 @@ class Solution(object):
         cur.left = par.right if par else None
         cur.right = par
         return new_root
+    
+    """
+    pre, cur, left, right = None, root, None, None
+        while cur:
+            left = cur.left
+            cur.left = right
+            right = cur.right
+            cur.right = pre
+            pre = cur
+            cur = left
+        return pre
+
+    """
