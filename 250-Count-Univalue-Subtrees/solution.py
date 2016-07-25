@@ -18,7 +18,6 @@ class Solution(object):
     def helper(self, cur, count):
         if not cur:
             return True
-
         left = self.helper(cur.left, count)
         right = self.helper(cur.right, count)
         if not left or not right:
