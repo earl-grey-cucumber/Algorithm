@@ -11,7 +11,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        temp = [0,0, 0]
+        temp = [float("inf"),float("-inf"), 0]
         self.helper(root, temp)
         return temp[2]
     
@@ -20,11 +20,10 @@ class Solution(object):
             temp[0] = float("inf")
             temp[1] = float("-inf")
             temp[2] = 0
-
             return True
-        lt = [0,0, 0]
+        lt = [float("inf"),float("-inf"), 0]
         left = self.helper(cur.left, lt)
-        rt = [0,0, 0]
+        rt = [float("inf"),float("-inf"), 0]
         right = self.helper(cur.right, rt)
         if left and right and lt[1] <= cur.val <= rt[0]:
             temp[0] = min(cur.val, lt[0])
