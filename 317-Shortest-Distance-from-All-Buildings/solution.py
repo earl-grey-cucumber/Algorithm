@@ -15,7 +15,7 @@ class Solution(object):
         directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
         for b in bs:
             queue = [b]
-            cur_len = 0
+            cur_len = 1
             visited = [[False for j in range(n)] for i in range(m)]
             visited[b / n][b % n] = True
             while queue:
@@ -23,13 +23,13 @@ class Solution(object):
                 for s in range(size):
                     cur = queue.pop(0)
                     i, j = cur / n, cur % n
-                    distance[i][j] += cur_len
                     
                     for d in directions:
                         x, y = i + d[0], j + d[1]
                         if self.isValid(x, y, m, n, grid, visited):
                             queue.append(x * n + y)
                             visited[x][y] = True
+                            distance[x][y] += cur_len
                             count[x][y] += 1
                 cur_len += 1
         result = sys.maxint
