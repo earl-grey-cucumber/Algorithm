@@ -35,9 +35,9 @@ class Solution(object):
         result = sys.maxint
         for i in range(m):
              for j in range(n):
-                 if grid[i][j] == 0 and count[i][j] == len(bs) and distance[i][j] < result:
-                     result = distance[i][j]
-        if result == sys.maxint or result == 0:
+                 if grid[i][j] == 0 and count[i][j] == len(bs):
+                     result = min(result, distance[i][j])
+        if result == sys.maxint:
             return -1
         return result
         
