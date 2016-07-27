@@ -16,7 +16,7 @@ class Solution(object):
                 continue
             for i in range(len(cur)):
                 if cur[i] == '(' or cur[i] == ')':
-                    temp = cur[0: i] + (cur[i + 1:] if i < len(cur) - 1 else "")
+                    temp = cur[0: i] + cur[i + 1:]
                     if temp not in visited:
                         visited.add(temp)
                         queue.append(temp)
