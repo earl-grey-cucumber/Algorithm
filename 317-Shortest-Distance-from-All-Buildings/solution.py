@@ -24,13 +24,13 @@ class Solution(object):
                     cur = queue.pop(0)
                     i, j = cur / n, cur % n
                     distance[i][j] += cur_len
-                    count[i][j] += 1
+                    
                     for d in directions:
                         x, y = i + d[0], j + d[1]
                         if self.isValid(x, y, m, n, grid, visited):
                             queue.append(x * n + y)
                             visited[x][y] = True
-                            
+                            count[x][y] += 1
                 cur_len += 1
         result = sys.maxint
         for i in range(m):
