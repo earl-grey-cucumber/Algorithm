@@ -20,7 +20,6 @@ class Solution(object):
                     if temp not in visited:
                         visited.add(temp)
                         queue.append(temp)
-                        #found = False
         return result
     
     def isValid(self, cur):
@@ -33,6 +32,3 @@ class Solution(object):
             if left < right:
                 return False
         return left == right
-    
-    
-    
