@@ -20,7 +20,7 @@ class Solution(object):
                     if temp not in visited:
                         visited.add(temp)
                         queue.append(temp)
-                        found = False
+                        #found = False
         return result
     
     def isValid(self, cur):
