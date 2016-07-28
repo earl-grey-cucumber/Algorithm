@@ -9,7 +9,6 @@ class Solution(object):
             return []
         if n == 1:
             return [0]
-        result = []
         maps, degrees = {}, {}
         for i in range(n):
             maps[i], degrees[i] = [], 0
@@ -18,7 +17,7 @@ class Solution(object):
             maps[e].append(s)
             degrees[s] += 1
             degrees[e] += 1
-        queue, visited = [], set()
+        queue = []
         for key in degrees:
             if degrees[key] == 1:
                 queue.append(key)
