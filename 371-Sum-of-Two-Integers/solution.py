@@ -5,7 +5,8 @@ class Solution(object):
         :type b: int
         :rtype: int
         """
-        MAX = 0x7FFFFFFF
+        """
+        MAX =  0x7FFFFFFF
         mask = 0xFFFFFFFF
         while b != 0:
             # ^ get different bits and & gets double 1s, << moves carry
@@ -14,12 +15,13 @@ class Solution(object):
         # then get 32-bit positive's Python complement negative
         return a if a <= MAX else ~(a ^ mask)
         """
-        mask = 0xffffffff
-        max_int = 0x7fffffff
+        mask =    0xFFFFFFFF
+        max_int = 0x7FFFFFFF
         while b != 0:
+            temp = a
             a = (a ^ b) & mask
-            b = ((a & b) << 1) & mask
+            b = ((temp & b) << 1) & mask
         return a if a <= max_int else ~(a ^ mask)
-        """
+
         
        
