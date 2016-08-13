@@ -5,8 +5,7 @@ class Solution(object):
         for i in range(1 << n):
             path = []
             for j in range(n):
-                bit = (i >> j) & 1
-                if bit != 0:
+                if (i >> j) & 1:
                     path.append(nums[j])
             result.append(path)
         return result
