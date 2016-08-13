@@ -1,14 +1,12 @@
 class Solution(object):
     def subsets(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
         result = []
-        self.dfs(nums, [], result, 0)
+        n = len(nums)
+        for i in range(1 << n):
+            path = []
+            for j in range(n):
+                bit = (i >> j) & 1
+                if bit != 0:
+                    path.append(nums[j])
+            result.append(path)
         return result
-    
-    def dfs(self, nums, path, result, index):
-        result.append(path)
-        for i in range(index, len(nums)):
-            self.dfs(nums, path + [nums[i]], result, i + 1)
