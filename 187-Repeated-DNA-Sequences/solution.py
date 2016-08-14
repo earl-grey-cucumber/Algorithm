@@ -4,22 +4,23 @@ class Solution(object):
         :type s: str
         :rtype: List[str]
         """
-        if len(s) <= 10:
+        if len(s) < 10:
             return []
-        maps = {}
-        dictionary = {'A': 0, "C": 1, 'G': 2, 'T':3}
-        cur = 0
-        result = []
+        first = 0
+        count = {}
+        result = set()
         mask = (1 << 18) - 1
+        mapping = {"A": 0, "C": 1, "G": 2, "T":3}
         for i in range(10):
-            cur = (cur << 2) | dictionary[s[i]]
-        maps[cur] = 1
+            first = (first << 2) | mapping[s[i]]
+        count[first] = 1
+        cur = first
         for i in range(10, len(s)):
-            cur = ((cur & mask) << 2) | dictionary[s[i]]
-            if cur not in maps:
-                maps[cur] = 1
+            cur = ((cur & mask) << 2) | mapping[s[i]]
+            if cur not in count:
+                count[cur] = 1
             else:
-                maps[cur] += 1
-            if maps[cur] == 2:
-                result.append(s[i - 9: i + 1])
-        return result
+                count[cur] += 1
+                if count[cur] == 2: # if add all count[cur] > 1 to result, will MLE
+                    result.add(s[i - 9: i + 1])
+        return list(result)
