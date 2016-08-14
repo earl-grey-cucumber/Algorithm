@@ -7,10 +7,6 @@
 
 class Solution(object):
     def rob(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
         def helper(cur):
             if not cur:
                 return [0, 0]
