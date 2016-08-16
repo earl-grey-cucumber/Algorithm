@@ -24,8 +24,8 @@ class Solution(object):
         :rtype: List[int]
         """
         n = len(self.nums)
-        for i in range(n):
-            index = random.randrange(i, n, 1)
+        for i in range(n - 1, -1, -1):
+            index = random.randrange(0, i + 1, 1)
             self.nums[i], self.nums[index] = self.nums[index], self.nums[i]
         return self.nums
 
