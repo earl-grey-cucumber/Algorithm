@@ -6,16 +6,25 @@
 
 class Solution(object):
     def plusOne(self, head):
-        def add(head):
-            if not head:
-                return 1
-            head.val += add(head.next)
-            carry, head.val = divmod(head.val, 10)
-            return carry
-            
-        carry = add(head)
-        if carry and head:
-            addc = ListNode(1)
-            addc.next = head
-            head = addc
-        return head
+        if not head:
+            return None
+
+        dummy = ListNode(0)
+        dummy.next = head
+
+        left, right = dummy, head
+        while right.next:
+            if right.val != 9:
+                left = right
+            right = right.next
+
+        if right.val != 9:
+            right.val += 1
+        else:
+            left.val += 1
+            right = left.next
+            while right:
+                right.val = 0
+                right = right.next
+
+        return dummy if dummy.val else dummy.next
