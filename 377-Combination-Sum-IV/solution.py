@@ -5,10 +5,11 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        dp = [0] * (target + 1)
+        nums = sorted(nums)
+        dp = [0 for i in range(target + 1)]
         dp[0] = 1
-        for x in range(target + 1):
-            for y in nums:
-                if x + y <= target:
-                    dp[x + y] += dp[x]
+        for i in range(target + 1):
+            for j in range(len(nums)):
+                if i + nums[j] <= target:
+                    dp[i + nums[j]] += dp[i]
         return dp[target]
