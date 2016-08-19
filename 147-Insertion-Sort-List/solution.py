@@ -12,18 +12,22 @@ class Solution(object):
         """
         if not head or not head.next:
             return head
-        dummy = ListNode(0)
-        pre, cur = dummy, head
+        dummy = ListNode(-1)
         dummy.next = head
+        cur = head
         while cur.next:
+            post = cur.next.next
             if cur.val > cur.next.val:
+                pre = dummy
                 while pre.next and pre.next.val < cur.next.val:
                     pre = pre.next
-                node = cur.next
-                cur.next = node.next
-                node.next = pre.next
-                pre.next = node
-                pre = dummy
+                temp = cur.next
+                cur.next = post
+                temp.next = pre.next
+                pre.next = temp
+                #cur = post
             else:
                 cur = cur.next
+            if not cur:
+                break
         return dummy.next
