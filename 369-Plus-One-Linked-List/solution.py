@@ -6,25 +6,24 @@
 
 class Solution(object):
     def plusOne(self, head):
-        if not head:
-            return None
-
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
         dummy = ListNode(0)
         dummy.next = head
-
         left, right = dummy, head
         while right.next:
             if right.val != 9:
                 left = right
             right = right.next
-
         if right.val != 9:
             right.val += 1
+            return dummy.next
         else:
             left.val += 1
             right = left.next
             while right:
                 right.val = 0
                 right = right.next
-
-        return dummy if dummy.val else dummy.next
+        return dummy.next if dummy.val == 0 else dummy
