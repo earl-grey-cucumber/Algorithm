@@ -12,18 +12,19 @@ class Solution(object):
         """
         if not head or not head.next:
             return head
-        cur1, head2, tail1 = head, head.next, None
-        while cur1:
-            if not cur1.next:
-                tail1 = cur1
+        head2 = head.next
+        cur, tail = head, None
+        while cur:
+            if not cur.next:
+                tail = cur
                 break
-            cur2 = cur1.next
-            cur1.next = cur2.next
-            if cur2.next:
-                cur2.next = cur2.next.next
-            if not cur1.next:
-                tail1 = cur1
+            post = cur.next
+            cur.next = post.next
+            if post.next:
+                post.next = post.next.next
+            if not cur.next:
+                tail = cur
                 break
-            cur1 = cur1.next
-        tail1.next = head2
+            cur = cur.next
+        tail.next = head2
         return head
