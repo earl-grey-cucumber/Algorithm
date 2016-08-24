@@ -4,6 +4,15 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
+        top = 1
+        while top * 10 <= n:
+            top *= 10
+        def mycmp(a, b, top=top):
+            while a < top: a *= 10
+            while b < top: b *= 10
+            return -1 if a < b else b < a
+        return sorted(xrange(1, n+1), mycmp)
+        """
         if n < 1: return []
         res = []
         for first in xrange(1, 10):
@@ -20,6 +29,7 @@ class Solution(object):
                 self.get_all_number(t, n, res)
             else:
                 break
+        """
         """
         if n < 1:
             return []
