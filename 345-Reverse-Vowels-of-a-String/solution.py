@@ -13,8 +13,6 @@ class Solution(object):
             while i < j and temp[j] not in vowel:
                 j -= 1
             temp[i], temp[j] = temp[j], temp[i]
-            
             i += 1
             j -= 1
         return "".join(temp)
-            
