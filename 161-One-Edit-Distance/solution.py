@@ -5,21 +5,20 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        m, n = len(s), len(t)
-        if abs(m - n) >= 2:
+        if abs(len(s) - len(t)) > 1:
             return False
-        if m < n:
+        if len(s) > len(t):
             return self.isOneEditDistance(t, s)
-        i = 0
-        while i < n and s[i] == t[i]:
+        i, m, n = 0, len(s), len(t)
+        while i < m and s[i] == t[i]:
             i += 1
         if i == m:
-            return False
-        if m - n == 1:
-            while i < n and s[i + 1] == t[i]:
+            return n == m + 1
+        if m == n:
+            i += 1
+            while i < m and s[i] == t[i]:
                 i += 1
         else:
-            i += 1
-            while i < n and s[i] == t[i]:
+            while i < m and s[i] == t[i + 1]:
                 i += 1
-        return i == n
+        return i == m
