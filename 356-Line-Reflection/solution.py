@@ -4,22 +4,22 @@ class Solution(object):
         :type points: List[List[int]]
         :rtype: bool
         """
-        if not points or len(points) < 2:
+        if not points:
             return True
-        minx, maxx = points[0][0], points[0][0]
+        l, r = points[0][0], points[0][0]
         maps = {}
-        maps[points[0][0]] = [points[0][1]]
-        for i in range(1, len(points)):
-            x, y = points[i][0], points[i][1]
-            minx, maxx = min(minx, x), max(maxx, x)
-            if x not in maps:
-                maps[x] = [y]
-            else:
-                maps[x].append(y) 
-        center_y = (minx + maxx) / 2.0
-
-        for p in points:
-            ref_x = 2 * center_y - p[0]
-            if not (ref_x in maps and p[1] in maps[ref_x]):
+        for point in points:
+            l = min(l, point[0])
+            r = max(r, point[0])
+            if point[0] not in maps:
+                maps[point[0]] = set()
+            maps[point[0]].add(point[1])
+        mid = l + (r - l) / 2.0
+        for i, point in enumerate(points):
+            x, y = point[0], point[1]
+            reflect_x = mid * 2 - x
+            if reflect_x not in maps:
+                return False
+            if y not in maps[reflect_x]:
                 return False
         return True
