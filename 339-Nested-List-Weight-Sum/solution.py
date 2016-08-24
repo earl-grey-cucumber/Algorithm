@@ -25,12 +25,15 @@
 
 class Solution(object):
     def depthSum(self, nestedList):
-        """
-        :type nestedList: List[NestedInteger]
-        :rtype: int
-        """
-        def helper(item, depth):
-            if item.isInteger():
-                return depth * item.getInteger()
-            return sum(helper(cur, depth + 1) for cur in item.getList())
-        return sum([helper(item, 1) for item in nestedList])
+        q = nestedList[:]
+        depth, result = 1, 0
+        while q:
+            size = len(q)
+            for i in range(size):
+                cur = q.pop(0)
+                if cur.isInteger():
+                    result += cur.getInteger() * depth
+                else:
+                    q = q + cur.getList()
+            depth += 1
+        return result
