@@ -32,8 +32,5 @@ class Solution(object):
         def helper(item, depth):
             if item.isInteger():
                 return depth * item.getInteger()
-            res = 0
-            for cur in item.getList():
-                res += helper(cur, depth + 1)
-            return res
+            return sum(helper(cur, depth + 1) for cur in item.getList())
         return sum([helper(item, 1) for item in nestedList])
