@@ -34,6 +34,6 @@ class Solution(object):
                 if cur.isInteger():
                     result += cur.getInteger() * depth
                 else:
-                    q = q + cur.getList()
+                    q += cur.getList()
             depth += 1
         return result
