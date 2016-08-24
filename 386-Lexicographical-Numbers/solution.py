@@ -4,6 +4,20 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
+        result = []
+        cur = 1
+        for i in range(1, n + 1):
+            result.append(cur)
+            if cur * 10 <= n:
+                cur *= 10
+            elif cur % 10 != 9 and cur + 1 <= n:
+                cur += 1
+            else:
+                while (cur / 10) % 10 == 9:
+                    cur = cur / 10
+                cur = cur / 10 + 1
+        return result
+        """
         top = 1
         while top * 10 <= n:
             top *= 10
@@ -12,6 +26,7 @@ class Solution(object):
             while b < top: b *= 10
             return -1 if a < b else b < a
         return sorted(xrange(1, n+1), mycmp)
+        """
         """
         if n < 1: return []
         res = []
