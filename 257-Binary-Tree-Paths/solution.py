@@ -11,15 +11,17 @@ class Solution:
     def binaryTreePaths(self, root):
         if not root:
             return []
-        def dfs(cur, result, path):
-            if not cur.left and not cur.right:
-                result.append(path + str(cur.val))
-                return
-            if cur.left:
-                dfs(cur.left, result, path + str(cur.val) + "->")
-            if cur.right:
-                dfs(cur.right, result, path + str(cur.val) + "->")
-
         result = []
-        dfs(root, result, "")
+        q = [["", root]]
+        while q:
+            size = len(q)
+            for i in range(size):
+                path, cur = q.pop(0)
+                if not cur.left and not cur.right:
+                    result.append(path + str(cur.val))
+                else:
+                    if cur.left:
+                        q.append([path + str(cur.val) + "->", cur.left])
+                    if cur.right:
+                        q.append([path + str(cur.val) + "->", cur.right])
         return result
