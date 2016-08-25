@@ -1,11 +1,14 @@
 class Solution(object):
     def wallsAndGates(self, rooms):
+        """
+        :type rooms: List[List[int]]
+        :rtype: void Do not return anything, modify rooms in-place instead.
+        """
         INF = 2147483647
         if len(rooms) == 0:
             return
         m, n = len(rooms), len(rooms[0])
         queue = []
-        directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
         for i in range(m):
             for j in range(n):
                 if rooms[i][j] == 0:
@@ -13,6 +16,7 @@ class Solution(object):
         while queue:
             cur = queue.pop(0) # no need of size, no need to check for -1, only update INF
             i, j = cur / n, cur % n
+            directions = [[1,0],[-1,0],[0,1],[0,-1]]
             for d in directions:
                 newi, newj = i + d[0], j + d[1]
                 if 0 <= newi < m and 0 <= newj < n and rooms[newi][newj] == INF:
