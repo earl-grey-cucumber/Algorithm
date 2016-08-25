@@ -7,31 +7,23 @@
 
 class Solution(object):
     def largestBSTSubtree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        temp = [float("inf"),float("-inf"), 0]
-        self.helper(root, temp)
-        return temp[2]
-    
-    def helper(self, cur, temp):
-        if not cur:
-            temp[0] = float("inf")
-            temp[1] = float("-inf")
-            temp[2] = 0
-            return True
-        lt = [float("inf"),float("-inf"), 0]
-        left = self.helper(cur.left, lt)
-        rt = [float("inf"),float("-inf"), 0]
-        right = self.helper(cur.right, rt)
-        if left and right and lt[1] <= cur.val <= rt[0]:
-            temp[0] = min(cur.val, lt[0])
-            temp[1] = max(cur.val, rt[1])
-            temp[2] = lt[2] + rt[2] + 1
-            return True
+        #temp = [float("inf"),float("-inf"), 0]
+        return self.helper(root)[2]
+        #return temp[2]
+        
+    def helper(self, root):
+        if not root:
+            return [float("inf"), float("-inf"), 0, True]
+        #left_temp = [float("inf"),float("-inf"), 0]
+        left0, left1, left2, left3 = self.helper(root.left)
+        #right_temp = [float("inf"),float("-inf"), 0]
+        right0, right1, right2, right3 = self.helper(root.right)
+        is_bst = False
+        if left3 and right3 and left1 <= root.val and root.val <= right0:
+            return [
+                min(root.val, left0),
+                max(root.val, right1),
+                left2 + right2 + 1,
+                True]
         else:
-            temp[2] = max(lt[2], rt[2])
-            return False
-            
-       
+            return [float("inf"), float("-inf"), max(left2, right2), False]
