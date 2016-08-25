@@ -1,6 +1,5 @@
 class Solution(object):
     def wallsAndGates(self, rooms):
-        INF = 2147483647
         if len(rooms) == 0:
             return
         m, n = len(rooms), len(rooms[0])
