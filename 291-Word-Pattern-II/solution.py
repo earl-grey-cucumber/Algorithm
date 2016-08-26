@@ -5,30 +5,28 @@ class Solution(object):
         :type str: str
         :rtype: bool
         """
-        maps = {}
-        visited = set()
-        return self.isMatch(str, 0, pattern, 0, maps, visited)
-    
-    def isMatch(self, str, i, pat, j, maps, visited):
-        if i == len(str) and j == len(pat):
+        w2p, p2w = {}, {}
+        return self.match(pattern, str, 0, 0, w2p, p2w)
+
+    def match(self, pattern, str, i, j, w2p, p2w):
+        if i == len(pattern) and j == len(str):
             return True
-        if i == len(str) or j == len(pat):
+        elif i == len(pattern) or j == len(str):
             return False
-        c = pat[j]
-        if c in maps:
-            s = maps[c]
-            if not str.startswith(s, i):
+        p = pattern[i]
+        if p in p2w:
+            w = p2w[p]
+            if w == str[j:j+len(w)]:  # Match pattern.
+                return self.match(pattern, str, i + 1, j + len(w), w2p, p2w)
+            else:
                 return False
-            return self.isMatch(str, i + len(s), pat, j + 1, maps, visited)
         else:
-            for k in range(i, len(str)):
-                p = str[i: k + 1]
-                if p in visited:
-                    continue
-                maps[c] = p
-                visited.add(p)
-                if self.isMatch(str, k + 1, pat, j + 1, maps, visited):
-                    return True
-                del maps[c]
-                visited.remove(p)
-            return False
+            for k in xrange(j, len(str)):  # Try any possible word
+                w = str[j:k+1]
+                if w not in w2p:
+                    # Build mapping. Space: O(n + c)
+                    w2p[w], p2w[p] = p, w;
+                    if self.match(pattern, str, i + 1, k + 1, w2p, p2w):
+                        return True
+                    w2p.pop(w), p2w.pop(p);
+        return False
