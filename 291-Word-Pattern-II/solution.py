@@ -16,7 +16,7 @@ class Solution(object):
         p = pattern[i]
         if p in p2w:
             w = p2w[p]
-            if w == str[j:j+len(w)]:  # Match pattern.
+            if w == str[j:j+len(w)]:  # Match pattern
                 return self.match(pattern, str, i + 1, j + len(w), w2p, p2w)
             else:
                 return False
@@ -24,9 +24,9 @@ class Solution(object):
             for k in xrange(j, len(str)):  # Try any possible word
                 w = str[j:k+1]
                 if w not in w2p:
-                    # Build mapping. Space: O(n + c)
-                    w2p[w], p2w[p] = p, w;
+                    w2p[w], p2w[p] = p, w  # Build mapping. Space: O(n + c)
                     if self.match(pattern, str, i + 1, k + 1, w2p, p2w):
                         return True
-                    w2p.pop(w), p2w.pop(p);
+                    w2p.pop(w)
+                    p2w.pop(p)
         return False
