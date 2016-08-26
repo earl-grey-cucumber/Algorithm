@@ -1,9 +1,5 @@
 class Solution(object):
     def gameOfLife(self, board):
-        """
-        :type board: List[List[int]]
-        :rtype: void Do not return anything, modify board in-place instead.
-        """
         m, n = len(board), len(board[0])
         for i in range(m):
             for j in range(n):
@@ -19,7 +15,4 @@ class Solution(object):
                     board[i][j] |= 2
         for i in range(m):
             for j in range(n):
-                if board[i][j] >> 1 == 1:
-                    board[i][j] = 1
-                else:
-                    board[i][j] = 0
+                board[i][j] >>= 1
