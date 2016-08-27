@@ -23,9 +23,8 @@ class Solution(object):
                     else:
                         key = (float)(points[j].y - points[i].y) / (points[j].x - points[i].x)
                     if key not in maps:
-                        maps[key] = 2
-                    else:
-                        maps[key] += 1
+                        maps[key] = 1
+                    maps[key] += 1
             for k in maps:
                 result = max(result, maps[k] + same)
         return result
