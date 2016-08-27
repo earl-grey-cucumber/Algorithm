@@ -8,7 +8,7 @@ class Solution(object):
             code = "0"
             for i in range(1, len(s)):
                 dif = (ord(s[i]) - ord(s[i - 1]) + 26) % 26
-                code += str(dif)
+                code += str(dif) + "#"
             return code
         maps = {}
         for s in strings:
