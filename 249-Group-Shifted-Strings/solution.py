@@ -5,19 +5,16 @@ class Solution(object):
         :rtype: List[List[str]]
         """
         def encode(s):
-            if not s:
-                return ""
-            encoded = ""
+            code = "0"
             for i in range(1, len(s)):
-                diff = (ord(s[i]) - ord(s[i - 1]) + 26) % 26
-                encoded += str(diff) + "#"
-            return encoded
-                
-        maps = collections.defaultdict(list)
-        result = []
+                dif = (ord(s[i]) - ord(s[i - 1]) + 26) % 26
+                code += str(dif)
+            return code
+        maps = {}
         for s in strings:
-            encoded = encode(s)
-            maps[encoded].append(s)
-        for key, value in maps.items():
-            result.append(value)
-        return result
+            code = encode(s)
+            if code not in maps:
+                maps[code] = []
+            maps[code].append(s)
+        return maps.values()
+            
