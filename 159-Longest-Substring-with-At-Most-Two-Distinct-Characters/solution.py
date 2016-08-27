@@ -4,17 +4,18 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        p, q, max_len, min_index = -1, -1, 0, -1
+        i, j, max_len, count = 0, 0, 0, 0
+        maps = {}
         for i in xrange(len(s)):
-            if p == -1 or s[i] == s[p]:
-                p = i
-            elif q == -1 or s[i] == s[q]:
-                q = i
-            elif s[i] != s[p] and s[i] != s[q]:
-                min_index = min(p, q)
-                if p < q:
-                    p = i
-                else:
-                    q = i
-            max_len = max(max_len, i - min_index)
+            if s[i] not in maps:
+                maps[s[i]] = 0
+            maps[s[i]] += 1
+            if maps[s[i]] == 1:
+                count += 1
+                while count > 2:
+                    maps[s[j]] -= 1
+                    if maps[s[j]] == 0:
+                        count -= 1
+                    j += 1
+            max_len = max(max_len, i - j + 1)
         return max_len
