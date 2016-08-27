@@ -7,30 +7,10 @@
 
 class Solution(object):
     def verticalOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
-        if not root:
-            return []
-        left, right = 0, 0
-        result, maps = [], {}
-        queue = [[root, 0]]
-        while queue:
-            size = len(queue)
-            for i in range(size):
-                cur, col = queue.pop(0)
-                if col not in maps:
-                    maps[col] = []
-                maps[col].append(cur.val)
-                left, right = min(left, col), max(right, col)
-                if cur.left:
-                    queue.append([cur.left, col - 1])
-                if cur.right:
-                    queue.append([cur.right, col + 1])
-        i = left
-        while i <= right:
-            result.append(maps[i])
-            i += 1
-        return result
-            
+        cols = collections.defaultdict(list)
+        queue = [(root, 0)]
+        for node, i in queue:
+            if node:
+                cols[i].append(node.val)
+                queue += (node.left, i - 1), (node.right, i + 1)
+        return [cols[i] for i in sorted(cols)]   
