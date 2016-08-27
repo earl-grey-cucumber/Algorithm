@@ -4,20 +4,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        max_val = nums[0]
-        for num in nums:
-            max_val = max(max_val, num)
-        low, high = 1, max_val
-        while low <= high:
-            mid = low + (high - low) / 2
-            if low == high:
-                return low
-            count = 0
-            for i in range(len(nums)):
-                if low <= nums[i] <= mid:
-                    count += 1
-            if count > mid - low + 1:
-                high = mid
-            else:
-                low = mid + 1
-        return low
+        slow = nums[0]
+        fast = nums[nums[0]]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+
+        fast = 0
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        return slow
