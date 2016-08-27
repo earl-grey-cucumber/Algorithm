@@ -1,30 +1,19 @@
 class Solution(object):
     def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
-        if k <= 0:
-            return []
-        dic = {}
-        result = []
+        maps = {}
+        max_f = 0
         for num in nums:
-            if num not in dic:
-                dic[num] = 1
-            else:
-                dic[num] += 1
-        heap = []
-        for i in dic:
-            if len(heap) < k:
-                heap.append([dic[i], i])
-                if len(heap) == k:
-                    heapq.heapify(heap)
-            elif heapq.nsmallest(1, heap)[0][0] < dic[i]:
-                heapq.heappop(heap)
-                heapq.heappush(heap, [dic[i], i])
-        while k > 0:
-            cur = heapq.heappop(heap)
-            result.append(cur[1])
-            k -= 1
+            if num not in maps:
+                maps[num] = 0
+            maps[num] += 1
+            max_f = max(max_f, maps[num])
+        bucket = [[] for i in range(max_f + 1)]
+        for key in maps:
+            f = maps[key]
+            bucket[f].append(key)
+        result = []
+        i = max_f
+        while i >= 0 and len(result) < k:
+            result += bucket[i]
+            i -= 1
         return result
