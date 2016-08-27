@@ -8,8 +8,8 @@ class ValidWordAbbr(object):
         for word in dictionary:
             code = self.encode(word)
             if code not in self.maps:
-                self.maps[code] = []
-            self.maps[code].append(word)
+                self.maps[code] = set()
+            self.maps[code].add(word)
             
     def encode(self, word):
         if len(word) <= 2:
@@ -27,8 +27,10 @@ class ValidWordAbbr(object):
         code = self.encode(word)
         if code not in self.maps:
             return True
-        if len(self.maps[code]) == 1 and self.maps[code][0] == word:
-            return True
+        if len(self.maps[code]) == 1:
+            for val in self.maps[code]:
+                if val == word:
+                    return True
         return False
 
 
