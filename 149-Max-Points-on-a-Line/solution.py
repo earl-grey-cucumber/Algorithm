@@ -10,25 +10,22 @@ class Solution(object):
         :type points: List[Point]
         :rtype: int
         """
-        if not points or len(points) < 1:
-            return 0
-        max_count, n = 1, len(points)
-        for i in range(n):
+        result = 0
+        for i in range(len(points)):
+            maps = {float("-inf"): 1}
             same = 0
-            mapping = {float("-inf"): 1}
-            for j in range(i + 1, n):
-                key = 0.0
+            for j in range(i + 1, len(points)):
                 if points[j].x == points[i].x and points[j].y == points[i].y:
                     same += 1
                 else:
                     if points[j].x == points[i].x:
                         key = float("inf")
                     else:
-                        key = (0.0 + points[i].y-points[j].y)/(points[i].x-points[j].x)
-                    if key not in mapping:
-                        mapping[key] = 2
+                        key = (float)(points[j].y - points[i].y) / (points[j].x - points[i].x)
+                    if key not in maps:
+                        maps[key] = 2
                     else:
-                        mapping[key] += 1
-            for val in mapping.values():
-                max_count = max(max_count, val + same)
-        return max_count
+                        maps[key] += 1
+            for k in maps:
+                result = max(result, maps[k] + same)
+        return result
