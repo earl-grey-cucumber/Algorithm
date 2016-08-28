@@ -4,16 +4,20 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        def convert(n):
+        def helper(n):
             result = 0
             while n > 0:
-                d = n % 10
-                result += d**2
+                result += (n % 10) ** 2
                 n /= 10
             return result
-        visited = set()
-        while n != 1 and n not in visited:
+        if n <= 0:
+            return False
+        visited =  set()
+        while n != 1:
+            if n in visited:
+                return False
             visited.add(n)
-            n = convert(n)
-        return n == 1
-        
+            n = helper(n)
+        return True
+
+            
