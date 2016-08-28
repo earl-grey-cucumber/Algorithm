@@ -42,6 +42,7 @@ class SnakeGame(object):
             self.body.append(tail)
         return len(self.body) - 1
 
+
 # Your SnakeGame object will be instantiated and called as such:
 # obj = SnakeGame(width, height, food)
 # param_1 = obj.move(direction)
