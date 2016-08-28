@@ -27,7 +27,7 @@ class TicTacToe(object):
         if row + col == n - 1: # not elif, some point may in both diagonals, also it’s n - 1
             self.dig2[i] += 1
         if any([self.rows[row][i] == n, self.cols[col][i] == n, \
-self.dig1[i] == n, self.dig2[i] == n]):
+            self.dig1[i] == n, self.dig2[i] == n]):
             return player
         return 0
 
