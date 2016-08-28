@@ -4,21 +4,17 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        if n <= 2:
-            return 0
-        dp = [True] * n
+        dp = [True for i in range(n)] # True means is prime number
         i = 2
         while i * i < n:
             if dp[i]:
-                j = i
-                while j * i < n:
-                    dp[j * i] = False
-                    j += 1
-            i += 1
+                temp = i * i
+                while temp < n:
+                    dp[temp] = False
+                    temp += i
+            i += 1            
         count = 0
         for i in range(2, n):
             if dp[i]:
                 count += 1
         return count
-            
-        
