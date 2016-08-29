@@ -1,34 +1,24 @@
 class Solution(object):
     def calculate(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        result, i, temp, isNeg = 0, 0, 1, False
-        while i < len(s):
-            c = s[i]
-            if c == ' ':
-                i += 1
-                continue
-            if c.isdigit():
-                num = 0
-                while i < len(s) and s[i].isdigit():
-                    num = num * 10 + ord(s[i]) - ord('0')
-                    i += 1
-                if not isNeg:
-                    temp *= num
+        stack = []
+        num, result, n, i = 0, 0, len(s), 0
+        sign = '+'
+        while i < n:
+            if s[i].isdigit():
+                num = num * 10 + ord(s[i]) - ord('0')
+            if i == n - 1 or (not s[i].isdigit() and s[i] != ' '):
+                if sign == '-':
+                    stack.append(-1 * num)
+                elif sign == '+':
+                    stack.append(num)
+                elif sign == '*':
+                    stack.append(stack.pop(-1) * num)
                 else:
-                    temp = (int)(float(temp) / num)
-            else:
-                isNeg = False
-                if c == "+":
-                    result += temp
-                    temp = 1
-                elif c == "-":
-                    result += temp
-                    temp = -1
-                elif c == "/":
-                    isNeg = True
-                i += 1
-        result += temp
+                    stack.append((int)((float)(stack.pop(-1)) / num))
+                sign = s[i]
+                num = 0
+            i += 1
+        result, size = 0, len(stack)
+        for j in stack:
+            result += j
         return result
