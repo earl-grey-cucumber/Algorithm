@@ -9,19 +9,28 @@ class Solution(object):
         """
         def func(num, a, b, c):
             return a * num * num + b * num + c
-        
-        if not nums:
-            return []
-        n = len(nums)
         result = []
-        i, j = 0, n - 1
-        k = -1 if a >= 0 else 1
-        while i <= j:
-            cand1, cand2 = func(nums[i], a, b, c), func(nums[j], a, b, c)
-            if k * cand1 < k * cand2:
-                result.append(cand1)
-                i += 1
-            else:
-                result.append(cand2)
-                j -= 1
-        return result[::k]
+        n = len(nums)
+        if a >= 0:
+            low, high = 0, n - 1
+            while low <= high:
+                val1, val2 = func(nums[low], a, b, c), func(nums[high], a, b, c)
+                if val1 > val2:
+                    result.append(val1)
+                    low += 1
+                else:
+                    result.append(val2)
+                    high -= 1
+            result = result[::-1]
+        else:
+            low, high = 0, n - 1
+            while low <= high:
+                val1, val2 = func(nums[low], a, b, c), func(nums[high], a, b, c)
+                if val1 < val2:
+                    result.append(val1)
+                    low += 1
+                else:
+                    result.append(val2)
+                    high -= 1
+        return result
+        
