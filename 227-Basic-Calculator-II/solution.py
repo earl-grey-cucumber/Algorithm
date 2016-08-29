@@ -4,29 +4,31 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        i, result, temp = 0, 0, 1
-        divide = False
+        result, i, temp, isNeg = 0, 0, 1, False
         while i < len(s):
             c = s[i]
-            if '0' <= c <= '9':
-                num = int(c)
-                while i + 1 < len(s) and '0' <= s[i + 1] <= '9':
-                    num = num * 10 + int(s[i + 1])
+            if c == ' ':
+                i += 1
+                continue
+            if c.isdigit():
+                num = 0
+                while i < len(s) and s[i].isdigit():
+                    num = num * 10 + ord(s[i]) - ord('0')
                     i += 1
-                if divide:
-                    temp = (int)(float(temp) / num)
-                else:
+                if not isNeg:
                     temp *= num
-            elif c == "+" or c == "-" or c == "*" or c == "/":
-                divide = False
-                if c == "/":
-                    divide = True
-                elif c == "+": 
+                else:
+                    temp = (int)(float(temp) / num)
+            else:
+                isNeg = False
+                if c == "+":
                     result += temp
                     temp = 1
                 elif c == "-":
                     result += temp
                     temp = -1
-            i += 1
+                elif c == "/":
+                    isNeg = True
+                i += 1
         result += temp
         return result
