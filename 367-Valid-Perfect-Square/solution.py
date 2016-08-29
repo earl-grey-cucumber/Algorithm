@@ -1,11 +1,8 @@
 class Solution(object):
     def isPerfectSquare(self, num):
-        """
-        :type num: int
-        :rtype: bool
-        """
         if num <= 1:
             return num == 1
+        """
         i = 1
         while num > 0:
             num -= i
@@ -22,5 +19,4 @@ class Solution(object):
                 low = mid + 1
             else:
                 high = mid - 1
-        return low * low == num
-        """
+        return False
