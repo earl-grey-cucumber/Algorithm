@@ -7,19 +7,23 @@
 
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
         if not root:
             return root
-        if root == p:
-            return p
-        if root == q:
-            return q
+        if root == p or root == q:
+            return root
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
         if left and right:
             return root
-        elif left:
+        if left:
             return left
-        elif right:
+        if right:
             return right
-        else:
-            return None
+        return None
+        
