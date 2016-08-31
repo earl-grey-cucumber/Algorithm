@@ -34,7 +34,7 @@ class Solution(object):
             directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
             for d in directions:
                 x, y = i + d[0], j + d[1]
-                if 0 <= x < m and  0 <= y < n and uf.f[x * n + y] != -1 and uf.merge(cur, x * n + y):
+                if 0 <= x < m and  0 <= y < n and uf.merge(cur, x * n + y):
                     count -= 1
             result.append(count)
         return result
