@@ -9,7 +9,11 @@ class Solution(object):
         while queue and len(pairs) < k:
             _, i, j = heapq.heappop(queue)
             pairs.append([nums1[i], nums2[j]])
-            push(i, j + 1)
-            if j == 0:
-                push(i + 1, 0)
+            push(i + 1, j)
+            if i == 0:
+                push(0, j + 1)
         return pairs
+
+        
+        
+        
