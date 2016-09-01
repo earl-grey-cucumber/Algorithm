@@ -14,7 +14,7 @@ class BSTIterator(object):
             self.cur = self.cur.left
 
     def hasNext(self):
-        return self.cur or self.stack
+        return self.stack
 
     def next(self):
         self.cur = self.stack.pop()
