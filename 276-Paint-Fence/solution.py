@@ -5,14 +5,14 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        if n <= 0:
+        if n == 0:
             return 0
         if n == 1:
             return k
-        same = k
-        dif = k * (k - 1)
+        same, diff = k, k * (k - 1)
         for i in range(3, n + 1):
-            temp = dif
-            dif = dif * (k - 1) + same * (k - 1)
+            temp = diff
+            diff = (diff + same ) * (k - 1)
             same = temp
-        return same + dif
+        return same + diff
+        
