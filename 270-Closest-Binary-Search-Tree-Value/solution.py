@@ -18,6 +18,8 @@ class Solution(object):
         diff = abs(root.val - target)
         cur = root
         while cur:
+            if cur.val == target:
+                return cur.val
             if abs(cur.val - target) < diff:
                 diff = abs(target - cur.val)
                 result = cur.val
