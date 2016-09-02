@@ -1,4 +1,3 @@
-import random
 class Solution(object):
     def findKthLargest(self, nums, k):
         """
@@ -11,7 +10,7 @@ class Solution(object):
     
     def helper(self, nums, l, h, k):
         #if l == h:
-        #    return nums[l]
+        #   return nums[l]
         pos = random.randrange(0, h - l + 1, 1) + l
         temp = nums[pos]
         nums[pos] = nums[h]
@@ -26,7 +25,7 @@ class Solution(object):
     def find(self, nums, l, h):
         i, j = l, l
         while j < h:
-            if nums[j] <= nums[h]:
+            if nums[j] < nums[h]:
                 temp = nums[i]
                 nums[i] = nums[j]
                 nums[j] = temp
