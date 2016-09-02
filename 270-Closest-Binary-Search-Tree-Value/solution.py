@@ -14,19 +14,15 @@ class Solution(object):
         """
         if not root:
             return -1
+        result = root.val
+        diff = abs(root.val - target)
         cur = root
-        min_diff = abs(root.val - target)
-        candidate = root.val
         while cur:
-            diff = abs(cur.val - target)
-            if diff == 0:
-                return cur.val
-            if diff < min_diff:
-                candidate = cur.val
-                min_diff = diff
-            if cur.val > target:
-                cur = cur.left
-            else:
+            if abs(cur.val - target) < diff:
+                diff = abs(target - cur.val)
+                result = cur.val
+            if cur.val < target:
                 cur = cur.right
-        return candidate
-            
+            else:
+                cur = cur.left
+        return result
