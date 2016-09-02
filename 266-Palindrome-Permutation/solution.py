@@ -4,16 +4,11 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        maps = {}
+        visited = set()
         for c in s:
-            if c not in maps:
-                maps[c] = 0
-            maps[c] += 1
-        odd = False
-        for key in maps:
-            if maps[key] % 2 == 1:
-                if odd:
-                    return False
-                odd = True
-        return True
+            if c not in visited:
+                visited.add(c)
+            else:
+                visited.remove(c)
+        return len(visited) <= 1
             
