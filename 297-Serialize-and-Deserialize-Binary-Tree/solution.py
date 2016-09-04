@@ -7,58 +7,40 @@
 
 class Codec:
     def serialize(self, root):
-        """Encodes a tree to a single string.
-        
-        :type root: TreeNode
-        :rtype: str
-        """
-        if not root:
-            return ""
-        queue = [root]
-        result = str(root.val)
-        while queue:
-            size = len(queue)
-            for i in range(size):
-                cur = queue.pop(0)
-                result += ","
-                if cur.left:
-                    queue.append(cur.left)
-                    result += str(cur.left.val)
-                else:
-                    result += "#"
-                result += ","
-                if cur.right:
-                    queue.append(cur.right)
-                    result += str(cur.right.val)
-                else:
-                    result += "#"
-        return result
+        def serializeHelper(node):
+            if not node:
+                vals.append('#')
+            else:
+                vals.append(str(node.val))
+                serializeHelper(node.left)
+                serializeHelper(node.right)
+        vals = []
+        serializeHelper(root)
+        return ' '.join(vals)
 
     def deserialize(self, data):
-        """Decodes your encoded data to tree.
+        def deserializeHelper():
+            val = next(vals)
+            if val == '#':
+                return None
+            else:
+                node = TreeNode(int(val))
+                node.left = deserializeHelper()
+                node.right = deserializeHelper()
+                return node
+        def isplit(source, sep):
+            sepsize = len(sep)
+            start = 0
+            while True:
+                idx = source.find(sep, start)
+                if idx == -1:
+                    yield source[start:]
+                    return
+                yield source[start:idx]
+                start = idx + sepsize
+        vals = iter(isplit(data, ' '))
+        return deserializeHelper()
         
-        :type data: str
-        :rtype: TreeNode
-        """
-        if not data:
-            return None
-        nodes = data.split(",")
-        root = TreeNode(int(nodes[0]))
-        queue = [root]
-        i = 1
-        while queue and i < len(nodes):
-            size = len(queue)
-            for j in range(size):
-                cur = queue.pop(0)
-                if nodes[i] != "#":
-                    cur.left = TreeNode(int(nodes[i]))
-                    queue.append(cur.left)
-                i += 1
-                if nodes[i] != "#":   
-                    cur.right = TreeNode(int(nodes[i]))
-                    queue.append(cur.right)
-                i += 1
-        return root
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
