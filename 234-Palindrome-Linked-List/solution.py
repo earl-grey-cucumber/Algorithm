@@ -10,6 +10,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
+        
         if not head or not head.next:
             return True
         slow, fast = head, head.next # want to find last node of 1st half
