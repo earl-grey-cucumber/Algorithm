@@ -11,27 +11,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        if not root or not root.left:
-            return root
-        return self.helper(root, None)
-        
-    def helper(self, cur, par):
-        if not cur:
-            return par
-        new_root = self.helper(cur.left, cur)
-        cur.left = par.right if par else None
-        cur.right = par
-        return new_root
-    
-    """
-    pre, cur, left, right = None, root, None, None
+        cur, p, left, right = root, None, None, None
         while cur:
             left = cur.left
             cur.left = right
             right = cur.right
-            cur.right = pre
-            pre = cur
+            cur.right = p
+            p = cur
             cur = left
-        return pre
-
-    """
+        return p
