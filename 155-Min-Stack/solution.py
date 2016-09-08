@@ -1,31 +1,28 @@
-"""
-only push the old minimum value when the current minimum value changes after pushing the new value x
-if pop operation could result in the changing of the current minimum value, pop twice and change the current minimum value to the last minimum value
-"""
-
 class MinStack(object):
     def __init__(self):
         self.stack = []
-        self.min_val = sys.maxint
+        self.min_val = None
         
     def push(self, x):
-        if x <= self.min_val:
-            self.stack.append(self.min_val)
+        if not self.stack:
+            self.stack.append(0)
             self.min_val = x
-        self.stack.append(x)
+        else:
+            self.stack.append(x - self.min_val)
+            if x < self.min_val:
+                self.min_val = x
         
     def pop(self):
-        if self.stack[-1] == self.min_val:
-            self.stack.pop(-1)
-            self.min_val = self.stack[-1]
-            self.stack.pop(-1)
-        else:
-            self.stack.pop(-1)
-        if not self.stack:
-            self.min_val = sys.maxint
+        x = self.stack.pop()
+        if x < 0:
+            self.min_val = self.min_val - x
         
     def top(self):
-        return self.stack[-1]
+        x = self.stack[-1]
+        if x > 0:
+            return x + self.min_val
+        else:
+            return self.min_val
 
     def getMin(self):
         return self.min_val
