@@ -7,9 +7,16 @@
 
 class Solution(object):
     def upsideDownBinaryTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: TreeNode
+        def helper(cur, p):
+            if not cur:
+                return p
+            newRoot = helper(cur.left, cur)
+            cur.left = p.right if p else None
+            cur.right = p
+            return newRoot
+        if not root or not root.left:
+            return root
+        return helper(root, None)
         """
         cur, p, left, right = root, None, None, None
         while cur:
@@ -20,3 +27,4 @@ class Solution(object):
             p = cur
             cur = left
         return p
+        """
