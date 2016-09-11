@@ -11,38 +11,37 @@ class SummaryRanges(object):
         Initialize your data structure here.
         """
         self.intervals = []
-        
-    def addNum(self, val):
-        """
-        :type val: int
-        :rtype: void
-        """
-        def get_up(nums, val):
-            low, high, up = 0, len(nums) - 1, len(nums)
-            while low <= high:
-                mid = low + (high - low) / 2
-                if nums[mid].start >= val:
-                    up = min(up, mid)
-                    high = mid - 1
-                else:
-                    low = mid + 1
-            return up
-            
-        up = get_up(self.intervals, val)
-        news, newe = val, val
-        if up > 0 and self.intervals[up - 1].end  + 1 >= val:
-            up -= 1
-        while up < len(self.intervals) and val + 1 >= self.intervals[up].start:
-            news = min(news, self.intervals[up].start)
-            newe = max(newe, self.intervals[up].end)
-            del self.intervals[up]
-        self.intervals.insert(up, Interval(news, newe))
 
+    def addNum(self, val):
+        def upper_bound(nums, target):
+            left, right = 0, len(nums) - 1
+            cand = len(nums)
+            while left <= right:
+                mid = left + (right - left) / 2
+                if nums[mid].start > target:
+                    right = mid - 1
+                    cand = min(cand, mid)
+                else:
+                    left = mid + 1
+            return cand
+
+        i = upper_bound(self.intervals, val)
+        start, end = val, val
+        if i != 0 and self.intervals[i-1].end + 1 >= val:
+            i -= 1
+        while i != len(self.intervals) and \
+              end + 1 >= self.intervals[i].start:
+            start = min(start, self.intervals[i].start)
+            end = max(end, self.intervals[i].end);
+            del self.intervals[i]
+        self.intervals.insert(i, Interval(start, end))
+        
     def getIntervals(self):
         """
         :rtype: List[Interval]
         """
         return self.intervals
+
 
 # Your SummaryRanges object will be instantiated and called as such:
 # obj = SummaryRanges()
