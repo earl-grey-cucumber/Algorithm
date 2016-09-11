@@ -15,18 +15,18 @@ class Solution(object):
         if not root:
             return None
         if p.right:
-            cur = p.right
-            while cur and cur.left:
-                cur = cur.left
-            return cur
+            suc = p.right
+            while suc and suc.left:
+                suc = suc.left
+            return suc
         else:
-            suc, cur = None, root
+            cur, suc = root, None
             while cur:
-                if cur.val > p.val:
+                if cur.val == p.val:
+                    return suc
+                elif cur.val > p.val:
                     suc = cur
                     cur = cur.left
-                elif cur.val < p.val:
-                    cur = cur.right
                 else:
-                    break
+                    cur = cur.right
             return suc
