@@ -11,20 +11,23 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        if not root:
-            return 0
-        left = self.depth_left(root.left)
-        right = self.depth_right(root.right)
-        if left == right:
-            return (1 << (left + 1)) - 1
-        return 1 + self.countNodes(root.left) + self.countNodes(root.right)
+        def helper(root):
+            if not root:
+                return 0
+            l, r = helper1(root.left), helper2(root.right)
+            if l == r:
+                return (1 << (l + 1)) - 1
+            else:
+                return 1 + helper(root.left) + helper(root.right)
+        def helper1(cur):
+            if not cur:
+                return 0
+            return 1 + helper1(cur.left)
+        def helper2(cur):
+            if not cur:
+                return 0
+            return 1 + helper2(cur.right)
         
-    def depth_left(self, cur):
-        if not cur:
-            return 0
-        return 1 + self.depth_left(cur.left)
+        return helper(root)
+   
         
-    def depth_right(self, cur):
-        if not cur:
-            return 0
-        return 1 + self.depth_right(cur.right)
