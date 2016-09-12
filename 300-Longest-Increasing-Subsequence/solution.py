@@ -4,12 +4,35 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        n, result = len(nums), 0
-        dp = [1 for i in range(n)]
+        """
+        n = len(nums)
+        dp = []
         for i in range(n):
-            for j in range(i):
-                if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-            result = max(result, dp[i])
-        return result
+            l, h = 0, len(dp) - 1
+            while l <= h:
+                mid = l + (h - l) / 2
+                if dp[mid] < nums[i]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            if l < len(dp):
+                dp[l] = num[i]
+            else:
+                dp.append(nums[i])
         
+        """
+        size = len(nums)
+        dp = []
+        for x in range(size):
+            low, high = 0, len(dp) - 1
+            while low <= high:
+                mid = (low + high) / 2
+                if dp[mid] < nums[x]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            if low < len(dp):
+                dp[low] = nums[x]
+            else:
+                dp.append(nums[x])
+        return len(dp)
