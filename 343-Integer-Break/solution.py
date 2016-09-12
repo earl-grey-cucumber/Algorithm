@@ -12,4 +12,4 @@ class Solution(object):
         elif digit == 1:
             return pow(3, (n - 4) / 3) * 4
         else:
-            return pow(3, (n - 2) / 3) * 2
+            return pow(3, n/ 3) * 2
