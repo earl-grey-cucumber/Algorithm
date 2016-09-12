@@ -11,20 +11,19 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        count = [0]
-        self.helper(root, count)
-        return count[0]
-        
-    def helper(self, cur, count):
-        if not cur:
+        def helper(cur):
+            if not cur:
+                return True
+            left = helper(cur.left)
+            right = helper(cur.right)
+            if not left or not right:
+                return False
+            if cur.left and cur.left.val != cur.val:
+                return False
+            if cur.right and cur.right.val != cur.val:
+                return False
+            result[0] += 1
             return True
-        left = self.helper(cur.left, count)
-        right = self.helper(cur.right, count)
-        if not left or not right:
-            return False
-        if cur.left and cur.left.val != cur.val:
-            return False
-        if cur.right and cur.right.val != cur.val:
-            return False
-        count[0] += 1
-        return True
+        result = [0]
+        helper(root)
+        return result[0]
