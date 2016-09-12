@@ -6,7 +6,10 @@ class Solution(object):
         """
         if n <= 3:
             return n - 1
-        dp = [0, 1, 2, 3] + [0 for i in range(n - 3)]
-        for i in range(4, n + 1):
-            dp[i] = max(dp[i - 2] * 2, dp[i - 3] * 3)
-        return dp[n]
+        digit = n % 3
+        if digit == 0:
+            return pow(3, n / 3)
+        elif digit == 1:
+            return pow(3, (n - 4) / 3) * 4
+        else:
+            return pow(3, (n - 2) / 3) * 2
