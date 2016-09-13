@@ -7,10 +7,17 @@
 
 class Solution(object):
     def kthSmallest(self, root, k):
-        """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
+        def countNodes(cur):
+            if not cur:
+                return 0
+            return 1 + countNodes(cur.left) + countNodes(cur.right)
+        count = countNodes(root.left)
+        if k <= count:
+            return self.kthSmallest(root.left, k)
+        elif k > count + 1:
+            return self.kthSmallest(root.right, k-1-count)
+        return root.val
+
         """
         cur, stack = root, []
         while k > 0 and (cur or stack):
@@ -24,3 +31,4 @@ class Solution(object):
                     return cur.val
                 cur = cur.right
         return cur
+        """
