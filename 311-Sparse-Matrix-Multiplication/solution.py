@@ -5,6 +5,7 @@ class Solution(object):
         :type B: List[List[int]]
         :rtype: List[List[int]]
         """
+        """
         ra, ca = len(A), len(A[0])
         rb, cb = len(B), len(B[0])
         mapa, mapb = {}, {}
@@ -33,5 +34,15 @@ class Solution(object):
                                 val += mapa[i][k] * mapb[j][k]
                         result[i][j] = val
         return result
+        """
+        m, n, l = len(A), len(A[0]), len(B[0])
+        res = [[0 for _ in xrange(l)] for _ in xrange(m)]
+        for i in xrange(m):
+            for k in xrange(n):
+                if A[i][k]:
+                    for j in xrange(l):
+                        res[i][j] += A[i][k] * B[k][j]
+        return res
+
 
                 
