@@ -65,3 +65,4 @@ class Solution(object):
         self.dfs(board, next, result, visited, x, y + 1, path)
         self.dfs(board, next, result, visited, x, y - 1, path)
         visited[x][y] = False
+        path = path[:-1]
