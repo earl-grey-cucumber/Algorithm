@@ -13,7 +13,7 @@ class Solution(object):
                 maps[num] += 1
             elif len(maps) < k:
                 maps[num] = 1
-            if len(maps) == k:
+            else:
                 for key in maps.keys():
                     maps[key] -= 1
                     if maps[key] == 0:
