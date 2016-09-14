@@ -5,7 +5,7 @@ class RandomizedSet(object):
         """
         Initialize your data structure here.
         """
-        self.vti, self.itv = {}, {}
+        self.vti, self.itv = {}, []
 
     def insert(self, val):
         """
@@ -15,9 +15,8 @@ class RandomizedSet(object):
         """
         if val in self.vti:
             return False
-        index = len(self.vti)
-        self.vti[val] = index
-        self.itv[index] = val
+        self.vti[val] = len(self.vti)
+        self.itv.append(val)
         return True
         
     def remove(self, val):
@@ -34,7 +33,7 @@ class RandomizedSet(object):
             new_val = self.itv[size - 1]
             self.itv[i] = new_val
             self.vti[new_val] = i
-        del self.itv[size - 1]
+        self.itv.pop(-1)
         del self.vti[val]
         return True
 
@@ -43,8 +42,7 @@ class RandomizedSet(object):
         Get a random element from the set.
         :rtype: int
         """
-        size = len(self.vti)
-        r = randint(0, size - 1)
+        r = randint(0, len(self.itv) - 1)
         return self.itv[r]
 
 
