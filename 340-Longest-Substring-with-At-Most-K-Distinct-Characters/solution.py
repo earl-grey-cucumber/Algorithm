@@ -15,12 +15,13 @@ class Solution(object):
                 maps[s[j]] += 1
             else: 
                 maps[s[j]] = 1
-                result = max(result, j - i)
+                
                 while i < j and len(maps) > k:
                     maps[s[i]] -= 1
                     if maps[s[i]] == 0:
                         del maps[s[i]]
                     i += 1
+            result = max(result, j - i + 1)
             j += 1
         result = max(result, n - i)
         return result
