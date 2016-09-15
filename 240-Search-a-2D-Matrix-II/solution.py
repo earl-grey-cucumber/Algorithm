@@ -5,6 +5,18 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
+        m, n = len(matrix), len(matrix[0])
+        count, i, j = 0, 0, n - 1
+        while i < m and j >= 0:
+            if matrix[i][j] == target:
+                return True
+            elif matrix[i][j] > target:
+                j -= 1
+            else:
+                i += 1
+        return False
+
+        """
         def helper(matrix, target, up, down, left, right):
             if up > down or left > right:
                 return False
@@ -18,3 +30,4 @@ class Solution(object):
                 
         m, n = len(matrix), len(matrix[0])
         return helper(matrix, target, 0, m - 1, 0, n - 1)
+        """
