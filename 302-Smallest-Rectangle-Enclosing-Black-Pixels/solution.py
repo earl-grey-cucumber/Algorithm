@@ -27,7 +27,6 @@ class Solution(object):
                     i = mid + 1
             return i
         m, n = len(image), len(image[0])
-        top, down, left, right = m - 1, 0, n - 1, 0
         left = helper_col(image, 0, y, 0, m, True)
         right = helper_col(image, y + 1, n, 0, m, False)
         top = helper_row(image, 0, x, left, right, True)
