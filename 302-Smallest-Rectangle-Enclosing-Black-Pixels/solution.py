@@ -18,16 +18,18 @@ class Solution(object):
                 else:
                     i = mid + 1
             return left
-        def helper_col(image, i, j, top, bottom, opt):
-            while i != j:
+        def helper_col2(image, i, j, top, bottom, opt):
+            right = i
+            while i <= j:
                 k, mid = top, (i + j) / 2
                 while k < bottom and image[k][mid] == '0':
                     k += 1
-                if (k < bottom) == opt:
-                    j = mid
-                else:
+                if k < bottom:
+                    right = max(right, mid)
                     i = mid + 1
-            return i
+                else:
+                    j = mid - 1
+            return right
             
         def helper_row(image, i, j, left, right, opt):
             while i != j:
@@ -41,7 +43,7 @@ class Solution(object):
             return i
         m, n = len(image), len(image[0])
         left = helper_col1(image, 0, y, 0, m, True)
-        right = helper_col(image, y + 1, n, 0, m, False)
-        top = helper_row(image, 0, x, left, right, True)
-        bottom = helper_row(image, x + 1, m, left, right, False)
-        return (right - left) * (bottom - top)
+        right = helper_col2(image, y, n - 1, 0, m, False)
+        top = helper_row(image, 0, x, left, right + 1, True)
+        bottom = helper_row(image, x + 1, m, left, right + 1, False)
+        return (right - left + 1) * (bottom - top)
