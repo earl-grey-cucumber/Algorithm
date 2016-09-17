@@ -20,7 +20,8 @@ class Solution(object):
         heapq.heappush(heap, (intervals[0].end, intervals[0]))
         for i in range(1, len(intervals)):
             cur = intervals[i]
-            while heap and cur.start >= heapq.nsmallest(1, heap, key=lambda s: s[0])[0][0]:
+            #while heap and cur.start >= heapq.nsmallest(1, heap, key=lambda s: s[0])[0][0]:
+            while heap and cur.start >= heap[0][0]:
                 heapq.heappop(heap)
             heapq.heappush(heap, (cur.end, cur))
             count = max(count, len(heap))
