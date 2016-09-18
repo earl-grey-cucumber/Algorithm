@@ -4,7 +4,6 @@ class Solution(object):
         :type s: str
         :rtype: List[str]
         """
-        """
         def is_valid(cur):
             left, right = 0, 0
             for i in range(len(cur)):
@@ -14,12 +13,12 @@ class Solution(object):
                     right += 1
                 if left < right:
                     return False
-                return left == right
+            return left == right
         result, queue, visited = [], [s], set()
         visited.add(s)
         found = False
         while queue:
-            cur = queue.pop()
+            cur = queue.pop(0)
             if is_valid(cur):
                 found = True
                 result.append(cur)
@@ -32,35 +31,5 @@ class Solution(object):
                         visited.add(cand)
                         queue.append(cand)
         return result
-        """
-        result, queue, visited = [], [s], set()
-        visited.add(s)
-        found = False
-        while queue:
-            cur = queue.pop(0)
-            if self.isValid(cur):
-                found = True
-                result.append(cur)
-            if found:
-                continue
-            for i in range(len(cur)):
-                if cur[i] == '(' or cur[i] == ')':
-                    temp = cur[0: i] + cur[i + 1:]
-                    if temp not in visited:
-                        visited.add(temp)
-                        queue.append(temp)
-        return result
-    
-    def isValid(self, cur):
-        left, right = 0, 0
-        for i in range(len(cur)):
-            if cur[i] == '(':
-                left += 1 
-            elif cur[i] == ')':
-                right += 1
-            if left < right:
-                return False
-        return left == right
 
-        
             
