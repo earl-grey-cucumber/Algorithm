@@ -23,7 +23,6 @@ class Solution(object):
                 for s in range(size):
                     cur = queue.pop(0)
                     i, j = cur / n, cur % n
-                    
                     for d in directions:
                         x, y = i + d[0], j + d[1]
                         if self.isValid(x, y, m, n, grid, visited):
