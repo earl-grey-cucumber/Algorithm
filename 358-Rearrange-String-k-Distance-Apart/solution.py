@@ -20,7 +20,8 @@ class Solution(object):
         while heap:
             used = []
             i = 0
-            for _ in xrange(min(k, len(str) - len(result))):
+            pre_len = len(result)
+            while i < min(k, len(str) - pre_len):
                 if not heap:
                     return ""
                 cur = heappop(heap)
@@ -28,7 +29,7 @@ class Solution(object):
                 cur[0] += 1
                 if cur[0] < 0:
                     used.append(cur)
-                #i += 1
+                i += 1
             for item in used:
                 heappush(heap, item)
         return "".join(result)
