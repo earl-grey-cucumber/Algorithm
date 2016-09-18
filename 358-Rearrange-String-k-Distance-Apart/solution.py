@@ -20,8 +20,8 @@ class Solution(object):
         while heap:
             used = []
             i = 0
-            pre_len = len(result)
-            while i < min(k, len(str) - pre_len):
+            i, pre_len = 0, len(result)
+            while i < k and i < len(str) - pre_len:
                 if not heap:
                     return ""
                 cur = heappop(heap)
