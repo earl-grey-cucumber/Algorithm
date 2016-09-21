@@ -8,7 +8,9 @@ class Solution(object):
         def dfs(nums, count, low, high, cur, left, right):
             if left > right:
                 temp = ''.join(cur)
-                if (len(cur) == len(low) and int(temp) < int(low)) or (len(cur) == len(high) and int(temp) > int(high)):
+                if len(cur) == len(low) and int(temp) < int(low):
+                    return
+                if len(cur) == len(high) and int(temp) > int(high):
                     return
                 count[0] += 1
                 return
