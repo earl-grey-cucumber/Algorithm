@@ -8,8 +8,8 @@ class Solution(object):
         dp[0] = True
         if stones[1] - stones[0] == 1:
             dp[1] = True
-        if len(stones) == 2:
-            return dp[-1]
+        #if len(stones) == 2:
+        #   return dp[-1]
         for i in xrange(2, len(stones)):
             for j in reversed(xrange(i)):
                 if stones[i] - stones[j] > j + 1:
