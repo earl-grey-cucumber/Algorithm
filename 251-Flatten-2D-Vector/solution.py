@@ -24,7 +24,8 @@ class Vector2D(object):
         """
         :rtype: bool
         """
-        return self.x < len(self.data) and self.y < len(self.data[self.x])
+        #return self.x < len(self.data) and self.y < len(self.data[self.x])
+        return self.x < len(self.data)
         
     def helper(self):
         while self.x < len(self.data) and self.y == len(self.data[self.x]):
