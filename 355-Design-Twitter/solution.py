@@ -29,13 +29,13 @@ class Twitter(object):
         if userId in self.friends:
             fs = list(self.friends[userId])
         fs.append(userId)
-        empty = True
+        #empty = True
         for f in fs:
             if f in self.maps and self.maps[f]:
                 heap.append((-self.maps[f][-1][1], self.maps[f][-1][0], f, 0)) 
-                empty = False
-        if empty:
-            return []
+                #empty = False
+        #if empty:
+        #    return []
         heapq.heapify(heap)
         k = 10
         while k > 0 and heap:
