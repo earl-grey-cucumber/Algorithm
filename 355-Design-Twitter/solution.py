@@ -23,25 +23,24 @@ class Twitter(object):
         :type userId: int
         :rtype: List[int]
         """
-        feeds = []
-        heap = []
-        target_users = []
+        feeds, heap, target_users = [], [], []
         if userId in self.friends:
             target_users = list(self.friends[userId])
         target_users.append(userId)
         for f in target_users:
             if f in self.maps and self.maps[f]:
+                # timestamp, tweetid, userid, index
                 heap.append((-self.maps[f][-1][1], self.maps[f][-1][0], f, 0)) 
         heapq.heapify(heap)
         k = 10
         while k > 0 and heap:
-            cur = heapq.heappop(heap)
-            feeds.append(cur[1])
-            f = cur[2]
-            if f in self.maps and self.maps[f]:
-                l = len(self.maps[f])
-                if cur[3] + 1 < l:
-                    heapq.heappush(heap, (-self.maps[f][-1 - cur[3] - 1][1], self.maps[f][-1 - cur[3] - 1][0], cur[2], cur[3] + 1))
+            time_stamp, tweet_id, user_id, index = heapq.heappop(heap)
+            feeds.append(tweet_id)
+            next_index = index + 1
+            #f = cur[2]
+            if user_id in self.maps and self.maps[user_id]:
+                if index + 1 < len(self.maps[user_id]):
+                    heapq.heappush(heap, (-self.maps[user_id][-1 - next_index][1], self.maps[user_id][-1 - next_index][0], user_id, next_index))
             k -= 1
         return feeds
 
