@@ -26,8 +26,8 @@ class Solution(object):
                 lookup[e[1]][e[0]] = 1.0 / values[i]
 
         result = []
-        for q in queries:
+        for query in queries:
             visited = set()
-            tmp = check(q[0], q[1], lookup, visited)
+            tmp = check(query[0], query[1], lookup, visited)
             result.append(tmp[1] if tmp[0] else -1)
         return result
