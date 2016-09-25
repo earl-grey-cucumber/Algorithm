@@ -13,7 +13,15 @@ class Solution(object):
         """
         if root == None:
             return 0
-        if root.left and not root.left.left and not root.left.right:
-            return root.left.val + self.sumOfLeftLeaves(root.right)
-        else:       # isn't leave
-            return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+        queue = [root]
+        sum = 0
+        while queue:
+            cur = queue.pop(0)
+            if cur.left and not cur.left.left and not cur.left.right:
+                sum += cur.left.val
+            if cur.left:
+                queue.append(cur.left)
+            if cur.right:
+                queue.append(cur.right)
+        return sum
+            
