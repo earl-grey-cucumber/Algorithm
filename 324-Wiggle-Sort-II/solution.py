@@ -1,9 +1,5 @@
 class Solution(object):
     def wiggleSort(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: void Do not return anything, modify nums in-place instead.
-        """
         n = len(nums)
         if n <= 1:
             return
@@ -12,10 +8,7 @@ class Solution(object):
             copy[i] = nums[i]
         if n % 2 == 1:
             mid_val = self.helper(copy, 0, n - 1, n / 2 + 1)
-        else:
-            mid_val = self.helper(copy, 0, n - 1, n / 2)
-        answer = [mid_val] * n
-        if n % 2 == 1:
+            answer = [mid_val] * n
             left, right = 0, n - 2
             for i in range(n):
                 if nums[i] < mid_val:
@@ -25,6 +18,8 @@ class Solution(object):
                     answer[right] = nums[i]
                     right -= 2
         else:
+            mid_val = self.helper(copy, 0, n - 1, n / 2)
+            answer = [mid_val] * n
             left, right = n - 2, 1
             for i in range(n):
                 if nums[i] < mid_val:
