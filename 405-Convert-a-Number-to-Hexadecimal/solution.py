@@ -19,4 +19,4 @@ class Solution(object):
             result = digits[num & 15] + result
             num = (num >> 4)
             """
-        return result.lstrip('0')
+        return result
