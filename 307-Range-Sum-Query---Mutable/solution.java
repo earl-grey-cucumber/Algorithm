@@ -65,7 +65,7 @@ public class NumArray {
         if(root == null || start > end) return 0;
         if(root.start == start && root.end == end) return root.sum;  
         int mid = root.start + (root.end - root.start) / 2;
-        if (mid >= end) {
+        if (mid + 1 > end) {
             return queryHelper(root.left, start, end);
         } else if (mid < start) {
             return queryHelper(root.right, start, end);
