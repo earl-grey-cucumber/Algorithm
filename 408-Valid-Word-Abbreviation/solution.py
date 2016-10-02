@@ -5,10 +5,6 @@ class Solution(object):
         :type abbr: str
         :rtype: bool
         """
-        if not word and not abbr:
-            return True
-        if not word or not abbr:
-            return False
         i, n, j = 0, len(abbr), 0
         while i < n and j < len(word):
             if abbr[i].isdigit():
